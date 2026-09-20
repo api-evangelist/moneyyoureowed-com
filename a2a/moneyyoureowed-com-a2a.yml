@@ -1,0 +1,139 @@
+generated: '2026-09-19'
+method: probed
+source: https://agent.moneyyoureowed.com/.well-known/agent-card.json
+card:
+  name: Money You're Owed catalog agent
+  url: https://agent.moneyyoureowed.com
+  version: 1.0.0
+  skills: 1
+  file: a2a/moneyyoureowed-com-agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: agent.moneyyoureowed.com
+  also_served_at:
+    path: /.well-known/agent.json
+    http_status: 200
+    note: The legacy path serves the byte-identical document (930 bytes, same MD5).
+  note: 'The card is served from a dedicated agent host, not the apex. moneyyoureowed.com and www.moneyyoureowed.com
+    return a real HTML 404 (not an SPA shell) for both /.well-known/agent-card.json and /.well-known/agent.json,
+    and mcp.moneyyoureowed.com 404s both with a JSON body. Ownership is not in question: provider.organization is
+    "Money You''re Owed" with provider.url https://moneyyoureowed.com, the host is a subdomain of the registrable
+    domain, and the apex /connect page documents the sibling MCP endpoint on mcp.moneyyoureowed.com that answers
+    the same catalog. The lead came from a2aregistry.org, which lists this exact URL.'
+x-evidence:
+  fetched: '2026-09-19'
+  url: https://agent.moneyyoureowed.com/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  body_bytes: 930
+  body_parses_as: JSON object with AgentCard shape (name, version, protocolVersion, capabilities, skills, supportedInterfaces,
+    provider)
+  corroborating_probes:
+  - url: https://agent.moneyyoureowed.com/.well-known/agent.json
+    http_status: 200
+    note: byte-identical copy
+  - url: https://moneyyoureowed.com/.well-known/agent-card.json
+    http_status: 404
+  - url: https://moneyyoureowed.com/.well-known/agent.json
+    http_status: 404
+  - url: https://mcp.moneyyoureowed.com/.well-known/agent-card.json
+    http_status: 404
+  - url: https://agent.moneyyoureowed.com/
+    http_status: 404
+    note: 'GET on the declared interface URL returns {"error": "not found"}; it is a POST-only JSON-RPC endpoint.'
+  - url: https://agent.moneyyoureowed.com/ (POST SendMessage)
+    http_status: 200
+    note: One read-only probe with the card's own example question. The endpoint answered a JSON-RPC 2.0 result
+      carrying a ROLE_AGENT message with a single data part {match, facts[{claim, source}], products[{name, price_usd,
+      url}]}. The A2A surface is live and callable anonymously.
+  - url: https://agent.moneyyoureowed.com/ (POST message/send)
+    http_status: 200
+    note: JSON-RPC error -32601 Method not found. The server implements the A2A 1.0 protobuf-style method name SendMessage,
+      not the 0.2/0.3-era message/send; SendStreamingMessage, GetTask and GetExtendedAgentCard also return -32601,
+      consistent with capabilities.streaming false.
+agent_card:
+  name: Money You're Owed catalog agent
+  description: Answers consumer questions about money owed (deposits, refunds, denied claims) with primary-sourced
+    facts and points to self-help kits.
+  version: 1.0.0
+  protocol_version: '1.0'
+  provider:
+    organization: Money You're Owed
+    url: https://moneyyoureowed.com
+  supported_interfaces:
+  - url: https://agent.moneyyoureowed.com
+    protocol_binding: JSONRPC
+    protocol_version: '1.0'
+  capabilities:
+    streaming: false
+    pushNotifications: false
+  default_input_modes:
+  - text/plain
+  - application/json
+  default_output_modes:
+  - application/json
+  security_schemes: null
+  skill_count: 1
+  skills:
+  - id: answer-money-questions
+    name: Answer money-recovery questions
+    description: Verified facts + product pointers. Read-only; no purchases.
+    tags:
+    - deposits
+    - refunds
+    - denied-claims
+    - consumer-rights
+    examples:
+    - My landlord kept my security deposit. What can I do?
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: '1.0'
+  preferred_transport: null
+  transport: JSONRPC (via supportedInterfaces[0].protocolBinding)
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  optional_fields:
+    default_input_modes: true
+    default_output_modes: true
+    preferred_transport: false
+    documentation_url: false
+    security_schemes: false
+  grade_basis: 'Graded against the A2A 1.0.0 hard checks. capabilities is an OBJECT (pass) with streaming and pushNotifications
+    declared as boolean fields. protocolVersion is present (pass) — at the top level as "1.0" AND on supportedInterfaces[0].
+    skills is an ARRAY (pass) with one skill carrying id, name, description, tags and examples. Both optional discriminators
+    are present: defaultInputModes and defaultOutputModes. preferredTransport is absent because A2A 1.0.0 superseded
+    it with supportedInterfaces[].protocolBinding, which the card declares (JSONRPC); its absence is spec-current,
+    not a gap. The declared interface was exercised once and answered a well-formed A2A 1.0 SendMessage response,
+    so the card describes a surface that exists.'
+  deviations:
+  - field: url
+    observed: absent at the top level
+    note: A reader written against A2A 0.3.0 expects a top-level url and finds none; the endpoint is carried on
+      supportedInterfaces[0].url. Recorded because both card shapes coexist in the wild, not because the card is
+      out of spec.
+  - field: securitySchemes / security
+    observed: absent
+    note: 'No security scheme is declared and none is required: the endpoint answered SendMessage anonymously. The
+      card is silent rather than declaring an explicit no-auth posture.'
+  - field: documentationUrl
+    observed: absent
+    note: The only human page describing the agent surfaces is https://moneyyoureowed.com/connect, which documents
+      the MCP endpoint and does not mention the A2A card.
+  - field: skills[0]
+    observed: no inputModes/outputModes/securityRequirements on the skill
+    note: The skill inherits the card defaults (text/plain or application/json in, application/json out). No inputSchema/outputSchema
+      is published; the response shape is only observable by calling it.
+  - field: JSON-RPC method names
+    observed: SendMessage implemented; message/send returns -32601
+    note: The server speaks the A2A 1.0 method vocabulary only. A 0.2/0.3 client using message/send will see Method
+      not found even though the card is valid and the surface is live.
+surface_relationship:
+  note: 'The A2A agent and the MCP server (mcp/moneyyoureowed-com-mcp.yml) are two bindings of ONE read-only catalog:
+    the A2A skill answer-money-questions and the MCP tool answer_money_question returned the same five source-cited
+    facts and the same product pointer for the same question on the same day. There is no REST/OpenAPI contract
+    behind either; the only other API-shaped path on the apex is the checkout starter site.js calls (/api/checkout-start),
+    which robots.txt disallows and which is a Stripe checkout bootstrap, not a public API.'

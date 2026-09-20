@@ -1,0 +1,75 @@
+generated: '2026-09-19'
+method: probed
+source: Live protocol probes of https://mcp.moneyyoureowed.com/mcp and https://agent.moneyyoureowed.com on 2026-09-19,
+  plus the published agent card and /connect page.
+summary: The provider conforms to the two agent protocols it ships — MCP (2025-06-18 revision, Streamable HTTP)
+  and A2A 1.0 (JSON-RPC binding) — and to JSON-RPC 2.0 underneath both. It has no REST surface, so the REST-shaped
+  standards (OAuth 2.0, OIDC, RFC 9457, JSON:API, pagination, idempotency) are absent rather than failed; oauth2/oidc
+  are recorded false because the docs explicitly state no OAuth. No domain-standard signature exists for this market
+  (consumer money-recovery education has none), so none is asserted.
+conformance:
+- id: mcp
+  standard: Model Context Protocol 2025-06-18
+  conforms: true
+  evidence: initialize returned protocolVersion 2025-06-18, capabilities.tools.listChanged false, serverInfo and
+    instructions; tools/list returned a tool with a JSON-Schema inputSchema and MCP annotations (readOnlyHint/destructiveHint/openWorldHint);
+    tools/call returned content[] + structuredContent + isError. Endpoint https://mcp.moneyyoureowed.com/mcp.
+- id: mcp-streamable-http
+  standard: MCP Streamable HTTP transport
+  conforms: true
+  evidence: 'POST /mcp with Accept: application/json, text/event-stream answers application/json; GET /mcp returns
+    405 (no server-initiated stream, permitted). Stateless — no Mcp-Session-Id issued.'
+- id: a2a
+  standard: A2A 1.0.0
+  conforms: true
+  evidence: Agent card at https://agent.moneyyoureowed.com/.well-known/agent-card.json grades conformant (a2a/moneyyoureowed-com-a2a.yml);
+    the declared JSONRPC interface answered SendMessage with a ROLE_AGENT message carrying a data part.
+- id: a2a-legacy-methods
+  standard: A2A 0.2/0.3 JSON-RPC method names (message/send, tasks/get)
+  conforms: false
+  evidence: message/send, message/stream, tasks/send and tasks/get all return -32601 Method not found. Only the
+    1.0 method vocabulary is implemented. Recorded for client compatibility, not as a defect.
+- id: jsonrpc-2.0
+  standard: JSON-RPC 2.0
+  conforms: true
+  evidence: Both endpoints return {"jsonrpc":"2.0","id":...} envelopes; unknown methods -32601, missing params -32602,
+    malformed body -32700 with id null — all standard codes.
+- id: rfc8615-well-known
+  standard: RFC 8615 well-known URIs
+  conforms: true
+  evidence: The agent card is served at the A2A-registered /.well-known/agent-card.json path on the agent host.
+- id: oauth2
+  standard: OAuth 2.0 (RFC 6749) / RFC 8414 / RFC 9728
+  conforms: false
+  evidence: /connect states "No API key or OAuth is required"; no authorization-server or protected-resource metadata
+    on any host (well-known/).
+- id: oidc
+  standard: OpenID Connect Discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration 404 on all four hosts.
+- id: rfc9116-security-txt
+  standard: RFC 9116 security.txt
+  conforms: false
+  evidence: /.well-known/security.txt 404 on all four hosts.
+- id: rfc9457
+  standard: RFC 9457 Problem Details
+  conforms: false
+  evidence: Not applicable — no HTTP-status-bearing REST surface; errors travel as JSON-RPC error objects (errors/).
+- id: openapi
+  standard: OpenAPI
+  conforms: false
+  evidence: No OpenAPI/Swagger document at /openapi.json, /openapi.yaml, /swagger.json, /api-docs or /docs on any
+    of the four hosts.
+domain_standard:
+  asserted: null
+  note: No sector standard applies to consumer money-recovery education; nothing is asserted. Reward-only check,
+    no penalty.
+not_applicable:
+- pagination
+- idempotency
+- json:api
+- odata
+- scim
+- fhir
+- fapi
+- psd2

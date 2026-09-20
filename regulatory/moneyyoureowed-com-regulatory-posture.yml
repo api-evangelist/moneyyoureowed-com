@@ -1,0 +1,80 @@
+generated: '2026-09-19'
+method: searched
+probe: true
+source: https://moneyyoureowed.com/privacy
+signals:
+  data_subject_request:
+    url: https://moneyyoureowed.com/privacy
+    channel: email
+    contact: hello@moneyyoureowed.com
+    rights_stated:
+    - access
+    - deletion
+    - unsubscribe
+    note: 'The privacy policy (dated July 26, 2026) states: "request access or deletion by emailing hello@moneyyoureowed.com".
+      An email channel, no web form and no API.'
+  subprocessors:
+    url: https://moneyyoureowed.com/privacy
+    named:
+    - name: MailerLite
+      purpose: email-list storage and marketing
+    - name: Stripe
+      purpose: payments
+    - name: Resend
+      purpose: transactional email
+    - name: Cloudflare
+      purpose: hosting, email routing, cookieless analytics
+    dated: July 26, 2026 (policy date; no separate subprocessor page)
+    note: A named processor list with purposes inside the privacy policy ("Who we share it with"), not a standalone
+      dated subprocessor table. Recorded because the substance (who, for what) is published; readers wanting a formal
+      register will not find one.
+summary: 'Two modest horizontal signals are published, both inside the dated privacy policy: a data-subject request
+  route (email, access + deletion) and a named list of four processors with purposes. Nothing else: no accessibility
+  statement or VPAT, no SBOM, no AI transparency page, no GPC statement, no transparency report, no data-residency
+  or export documentation, no incident-notification SLA, no age-assurance or notice-and-action page. The MCP/A2A
+  surfaces state that questions are not stored, which is a data-handling statement rather than one of the enumerated
+  signals. Which regimes reach this operator is decided by the Kin Score regime map, not here.'
+probed:
+- url: https://moneyyoureowed.com/privacy
+  status: 200
+- url: https://moneyyoureowed.com/terms
+  status: 200
+- url: https://moneyyoureowed.com/connect
+  status: 200
+- url: https://moneyyoureowed.com/accessibility
+  status: 404
+- url: https://moneyyoureowed.com/accessibility/vpat
+  status: 404
+- url: https://moneyyoureowed.com/legal
+  status: 404
+- url: https://moneyyoureowed.com/legal/subprocessors
+  status: 404
+- url: https://moneyyoureowed.com/legal/dpa
+  status: 404
+- url: https://moneyyoureowed.com/privacy/requests
+  status: 404
+- url: https://moneyyoureowed.com/transparency
+  status: 404
+- url: https://moneyyoureowed.com/trust
+  status: 404
+- url: https://moneyyoureowed.com/security
+  status: 404
+- url: https://moneyyoureowed.com/security/sbom
+  status: 404
+- url: https://moneyyoureowed.com/docs/data-residency
+  status: 404
+- url: https://moneyyoureowed.com/ai
+  status: 404
+- url: https://moneyyoureowed.com/ai/transparency
+  status: 404
+- url: https://moneyyoureowed.com/legal/report-content
+  status: 404
+- url: https://moneyyoureowed.com/.well-known/security.txt
+  status: 404
+observations:
+- The privacy policy says the site uses "basic, non-identifying analytics" via Cloudflare cookieless analytics and
+  does not sell personal information; no GPC statement, so global_privacy_control is not set.
+- The DenialFix product section of the policy states claim documents are processed in the purchaser's browser and
+  never sent to the operator or any AI service — a privacy-by-design statement, not an enumerated signal.
+- Stated audience is US consumers ("US consumer finance"); no country of operation, business address or imprint
+  is published.

@@ -1,0 +1,102 @@
+generated: '2026-09-19'
+method: probed
+status: published
+source: https://moneyyoureowed.com/connect
+docs: https://moneyyoureowed.com/connect
+summary: 'Money You''re Owed publishes ONE free, anonymous, read-only remote MCP server at https://mcp.moneyyoureowed.com/mcp
+  (Streamable HTTP, protocol 2025-06-18, serverInfo moneyyoureowed-catalog-mcp 1.0.0). It exposes a single tool,
+  answer_money_question, which returns source-cited consumer money-recovery facts plus a pointer to one of the operator''s
+  self-help kits. The /connect page documents it for Claude and Gemini custom connectors and states: read-only,
+  no account, no API key or OAuth, rate-limited.'
+deployment:
+  mode: remote
+  endpoint: https://mcp.moneyyoureowed.com/mcp
+  auth: none
+  verified: probed
+  note: A hosted HTTPS endpoint an MCP client POSTs to directly. No stdio package, npx/uvx install or source repository
+    is published anywhere on the site. initialize, tools/list and one tools/call all succeeded anonymously on 2026-09-19
+    with no Mcp-Session-Id issued (stateless).
+servers:
+- id: moneyyoureowed-catalog-mcp
+  name: Money You're Owed Catalog
+  endpoint: https://mcp.moneyyoureowed.com/mcp
+  transport: streamable-http
+  stateful: false
+  protocol_version: '2025-06-18'
+  server_version: 1.0.0
+  auth: none
+  status: live
+  capabilities:
+    tools:
+      listChanged: false
+  instructions: Read-only Q&A over verified consumer money-recovery facts (security deposits, denied claims, unclaimed
+    property). No transactions; the only tool is answer_money_question.
+  probe:
+  - method: POST initialize
+    http_status: 200
+    fetched: '2026-09-19'
+  - method: POST tools/list
+    http_status: 200
+    tools: 1
+    fetched: '2026-09-19'
+    note: Succeeds with or without a prior initialize and without any session header.
+  - method: POST tools/call answer_money_question
+    http_status: 200
+    fetched: '2026-09-19'
+    note: One read-only call with the published example question; returned content[0].text plus structuredContent
+      {match, facts[], products[]} and isError false.
+  - method: POST tools/call with {} arguments
+    http_status: 200
+    note: 'JSON-RPC error -32602 "Missing required argument: question".'
+  - method: POST resources/list
+    http_status: 200
+    note: JSON-RPC -32601 Method not found — no resources.
+  - method: POST prompts/list
+    http_status: 200
+    note: JSON-RPC -32601 Method not found — no prompts.
+  - method: 'GET /mcp (Accept: text/event-stream)'
+    http_status: 405
+    note: No server-initiated SSE stream; POST-only.
+  scope: Public, read-only lookup of the operator's fact catalog. No write, payment or checkout tool.
+  tools:
+  - name: answer_money_question
+    title: Answer a money-recovery question
+    description: 'Look up verified, source-cited facts and a linked educational resource for a consumer money-recovery
+      question (security deposits, denied refunds, denied insurance/warranty claims, unclaimed property). Read-only
+      lookup: it does not collect personal data, make payments, or change anything.'
+    inputSchema:
+      type: object
+      properties:
+        question:
+          type: string
+          description: The consumer's question in plain language, e.g. 'my landlord kept my security deposit'
+      required:
+      - question
+    annotations:
+      readOnlyHint: true
+      destructiveHint: false
+      openWorldHint: false
+    read_only: true
+    observed_output:
+      note: No outputSchema is declared; this is the shape observed on one live call, not a contract.
+      content:
+      - type: text
+        text: 'newline-joined "<claim> (source: <url>)" lines followed by "Related resource: <name> -- <url>"'
+      structuredContent:
+        match: boolean
+        facts:
+        - claim: string
+          source: string (URL, usually a statute or agency page)
+        products:
+        - name: string
+          price_usd: number
+          url: string (moneyyoureowed.com page)
+well_known:
+  note: 'mcp.moneyyoureowed.com serves NO discovery documents: /.well-known/oauth-protected-resource, /oauth-authorization-server,
+    /openid-configuration, /security.txt, /api-catalog, /ai-plugin.json and /mcp/server-card.json all return 404
+    with a JSON body (see well-known/). Consistent with an anonymous server — there is no protected resource to
+    describe.'
+related_surfaces:
+  a2a: a2a/moneyyoureowed-com-a2a.yml — the same catalog bound as an A2A 1.0 agent at https://agent.moneyyoureowed.com
+  openapi: null
+  note: No REST/OpenAPI contract exists, so no tool crosswalk is emitted.

@@ -1,0 +1,21 @@
+generated: '2026-09-19'
+method: searched
+source: https://moneyyoureowed.com/connect
+docs:
+- https://moneyyoureowed.com/connect
+limit_count: 0
+summary: 'The /connect page states the MCP endpoint is "Rate-limited: to control abusive traffic" but publishes
+  no number, window or scope, and no rate-limit headers were returned on any of the ~15 responses observed on 2026-09-19
+  (MCP initialize, tools/list x6, tools/call x2; A2A SendMessage x2 and the method probes). Exhaustion behaviour
+  is undocumented and was not triggered. An honest zero: the limit exists by the provider''s statement, its value
+  does not.'
+rate_limits: []
+stated_but_unquantified:
+- surface: https://mcp.moneyyoureowed.com/mcp
+  statement: 'Rate-limited: to control abusive traffic.'
+  source: https://moneyyoureowed.com/connect
+exhaustion:
+  status: undocumented
+  headers: []
+  note: No X-RateLimit-*, RateLimit-* or Retry-After header on any response; both hosts sit behind Cloudflare, which
+    may enforce its own edge limits.

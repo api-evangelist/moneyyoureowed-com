@@ -1,0 +1,26 @@
+generated: '2026-09-19'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: moneyyoureowed.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  6 20:15:02 2026 GMT
+  hsts: false
+- host: mcp.moneyyoureowed.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  1 21:05:59 2026 GMT
+  hsts: null
+- host: agent.moneyyoureowed.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  1 21:05:59 2026 GMT
+  hsts: null
+domains:
+- domain: moneyyoureowed.com
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

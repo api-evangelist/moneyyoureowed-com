@@ -1,0 +1,65 @@
+generated: '2026-09-19'
+method: searched
+source: https://moneyyoureowed.com/connect
+docs:
+- https://moneyyoureowed.com/connect
+- https://moneyyoureowed.com/
+plan_count: 0
+currency: USD
+model: free public endpoint; no plans, tiers, keys, quotas or paid API access of any kind
+summary: The MCP endpoint and the A2A agent are free and anonymous ("free public Model Context Protocol endpoint",
+  "No API key or OAuth is required"). There is no API pricing page and no enterprise or contact-sales tier, so plan_count
+  is 0 by design rather than by omission. The operator's revenue is consumer digital products sold through Stripe
+  checkout on the website; those prices are recorded below because the agent surfaces return them as product pointers
+  (structuredContent.products[].price_usd).
+plans: []
+related_product_pricing:
+  note: Consumer self-help kits, one-time USD prices as published on moneyyoureowed.com on 2026-09-19. Not API plans.
+  products:
+  - name: Complete Recovery Kit
+    price: 59
+    period: one-time
+    url: https://moneyyoureowed.com/
+    note: Bundle of the six standalone tools below.
+  - name: Medical Bill Dispute Kit
+    price: 19
+    period: one-time
+    url: https://moneyyoureowed.com/
+  - name: Airline & Travel Refund Toolkit
+    price: 17
+    period: one-time
+    url: https://moneyyoureowed.com/
+  - name: Bank & Card Fee Scripts
+    price: 12
+    period: one-time
+    url: https://moneyyoureowed.com/
+  - name: Subscription System
+    price: 15
+    period: one-time
+    url: https://moneyyoureowed.com/
+  - name: Refund & Dispute Letter Vault
+    price: 39
+    period: one-time
+    url: https://moneyyoureowed.com/
+  - name: Master Tracker
+    price: 29
+    period: one-time
+    url: https://moneyyoureowed.com/
+  - name: Deposit Defender (demand letter)
+    price: 29
+    period: one-time
+    url: https://moneyyoureowed.com/deposit-defender/
+    note: Rules-based analysis is free; the letter is paid. Returned by the agent as products[0].
+  - name: DenialFix
+    price: 47
+    period: one-time
+    url: https://moneyyoureowed.com/denialfix/
+  - name: GLP-1 Appeal pack
+    price: 39
+    period: one-time
+    url: https://moneyyoureowed.com/glp1-appeal/
+  - name: Airbnb Damage Claim Builder
+    price: 47
+    period: one-time
+    url: https://moneyyoureowed.com/airbnb-damage-claim/
+  refund_policy: 30-day money-back guarantee on digital products (https://moneyyoureowed.com/terms).

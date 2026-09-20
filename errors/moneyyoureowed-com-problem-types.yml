@@ -1,0 +1,51 @@
+generated: '2026-09-19'
+method: probed
+format: jsonrpc
+source: Observed JSON-RPC error envelopes from https://mcp.moneyyoureowed.com/mcp and https://agent.moneyyoureowed.com
+  on 2026-09-19.
+summary: Both surfaces return errors as JSON-RPC 2.0 error objects inside an HTTP 200, never as HTTP status codes
+  or RFC 9457 problem documents. Three codes were observed. The MCP tools/call path additionally carries a per-call
+  isError flag (false on the one successful call). No error reference page is published.
+envelope:
+  shape: '{"jsonrpc": "2.0", "id": <request id or null>, "error": {"code": <int>, "message": <string>}}'
+  http_status: 200
+  data_field: not observed
+problem_types:
+- code: -32700
+  title: Parse error
+  http_status: 200
+  observed_on:
+  - agent.moneyyoureowed.com
+  trigger: Non-JSON request body
+  remediation: 'Send a JSON-RPC 2.0 object with Content-Type: application/json.'
+  note: id is null in the response.
+- code: -32601
+  title: Method not found
+  http_status: 200
+  observed_on:
+  - mcp.moneyyoureowed.com
+  - agent.moneyyoureowed.com
+  trigger: 'Any method outside the implemented set: MCP resources/list, prompts/list; A2A message/send, message/stream,
+    tasks/*, SendStreamingMessage, GetTask, GetExtendedAgentCard'
+  remediation: 'MCP: use initialize, tools/list, tools/call only. A2A: use the 1.0 method name SendMessage.'
+- code: -32602
+  title: Invalid params
+  http_status: 200
+  observed_on:
+  - mcp.moneyyoureowed.com
+  trigger: tools/call answer_money_question without the required question argument
+  message_observed: 'Missing required argument: question'
+  remediation: Supply arguments.question as a non-empty string.
+http_level:
+- status: 404
+  where: GET on any path of agent./mcp. hosts
+  body: '{"error": "not found"}'
+- status: 405
+  where: GET https://mcp.moneyyoureowed.com/mcp
+  body: empty
+- status: 501
+  where: OPTIONS https://agent.moneyyoureowed.com/
+  body: Cloudflare HTML
+not_observed:
+- rate-limit exhaustion response (429 or JSON-RPC code) — stated to exist on /connect, never triggered
+- tools/call isError true

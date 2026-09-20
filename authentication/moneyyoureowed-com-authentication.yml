@@ -1,0 +1,33 @@
+generated: '2026-09-19'
+method: probed
+source: https://moneyyoureowed.com/connect
+docs: https://moneyyoureowed.com/connect
+summary: 'Both machine surfaces are anonymous. The /connect page states "No API key or OAuth is required" for the
+  MCP endpoint, and live probes confirmed it: MCP initialize/tools/list/tools/call and the A2A SendMessage call
+  all succeeded with no credential. No securitySchemes are declared in the agent card, no OAuth/OIDC discovery documents
+  exist on any host, and there is no sign-up, login or developer console.'
+schemes: []
+anonymous_access: true
+surfaces:
+- name: MCP server
+  endpoint: https://mcp.moneyyoureowed.com/mcp
+  auth: none
+  evidence: POST tools/list and tools/call returned 200 results with no Authorization header (2026-09-19).
+- name: A2A agent
+  endpoint: https://agent.moneyyoureowed.com
+  auth: none
+  evidence: POST SendMessage returned a 200 JSON-RPC result with no Authorization header (2026-09-19); the agent
+    card declares no securitySchemes.
+oauth:
+  documented: false
+  authorization_server_metadata: null
+  protected_resource_metadata: null
+  note: /.well-known/oauth-authorization-server, /oauth-protected-resource and /openid-configuration 404 on all
+    four hosts.
+api_keys:
+  documented: false
+  issuance: null
+notes:
+- 'Abuse control is stated as rate limiting ("Rate-limited: to control abusive traffic") rather than credentials;
+  no limit values or headers are published (see rate-limits/).'
+- The only credentialed flow on the property is Stripe checkout for the consumer kits, which is not an API.

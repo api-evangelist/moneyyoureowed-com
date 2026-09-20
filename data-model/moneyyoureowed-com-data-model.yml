@@ -1,0 +1,43 @@
+generated: '2026-09-19'
+method: probed
+source: Observed structuredContent from one tools/call on https://mcp.moneyyoureowed.com/mcp and the data part of
+  one A2A SendMessage on 2026-09-19.
+summary: No schema is published (no OpenAPI, no MCP outputSchema, no A2A skill outputSchema). This is the entity
+  graph observed in the live response payload — three small entities. It documents what an agent will receive, not
+  a contract the provider has committed to.
+entities:
+- name: Answer
+  fields:
+  - name: match
+    type: boolean
+  - name: facts
+    type: Fact[]
+  - name: products
+    type: Product[]
+  note: Root of structuredContent (MCP) and of parts[0].data (A2A).
+- name: Fact
+  fields:
+  - name: claim
+    type: string
+  - name: source
+    type: string (URL)
+  note: Five observed per answer; sources were statute pages (leginfo.legislature.ca.gov, codes.findlaw.com).
+- name: Product
+  fields:
+  - name: name
+    type: string
+  - name: price_usd
+    type: number
+  - name: url
+    type: string (URL on moneyyoureowed.com)
+relationships:
+- from: Answer
+  to: Fact
+  type: has_many
+  via: facts
+- from: Answer
+  to: Product
+  type: has_many
+  via: products
+identifiers:
+  note: No ids are exposed; facts and products are addressed only by their URLs.

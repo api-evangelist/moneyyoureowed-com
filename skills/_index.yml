@@ -1,0 +1,11 @@
+generated: '2026-09-19'
+method: generated
+source: mcp/moneyyoureowed-com-mcp.yml and a2a/moneyyoureowed-com-a2a.yml — grounded only in the tool and skill
+  names returned by live tools/list and the published agent card.
+skills:
+- name: answer-money-recovery-question
+  file: skills/moneyyoureowed-com-answer-money-recovery-question.md
+  surfaces:
+  - mcp:answer_money_question
+  - a2a:answer-money-questions
+  read_only: true

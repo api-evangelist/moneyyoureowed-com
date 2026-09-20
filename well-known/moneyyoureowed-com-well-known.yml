@@ -1,0 +1,341 @@
+generated: '2026-09-19'
+method: probed
+source: Live GET probes of the named /.well-known/* path list on moneyyoureowed.com, www.moneyyoureowed.com, agent.moneyyoureowed.com
+  (A2A host) and mcp.moneyyoureowed.com (MCP host), 2026-09-19. Every row is a request that was issued; every status
+  is the one returned.
+summary:
+  hosts_probed: 4
+  paths_probed: 62
+  documents_served: 2
+  note: The only well-known documents served anywhere are the A2A Agent Card on agent.moneyyoureowed.com (canonical
+    agent-card.json and legacy agent.json, byte-identical). No security.txt (RFC 9116), no OAuth/OIDC metadata (RFC
+    8414 / RFC 9728 — consistent with both agent surfaces being anonymous), no API catalog (RFC 9727), no apis.json,
+    no ai-plugin.json, no UCP/ACP/AAuth on any host. The apex answers a genuine HTML 404 and the agent/MCP hosts
+    a JSON 404, so none of these are SPA-shell false negatives.
+hosts:
+- host: moneyyoureowed.com
+  role: Apex website (Cloudflare-hosted static site + Stripe checkout)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/openid-configuration
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/api-catalog
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/api-catalog.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/ucp.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/acp.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/aauth-resource.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/apis.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /apis.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /apis.yml
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/agent-card.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/agent.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+- host: www.moneyyoureowed.com
+  role: www alias — same responses as the apex
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/openid-configuration
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/api-catalog
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/api-catalog.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/ucp.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/acp.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/aauth-resource.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/apis.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /apis.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /apis.yml
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/agent-card.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+  - path: /.well-known/agent.json
+    status: 404
+    content_type: text/html; charset=utf-8
+    file: null
+    note: Real HTML 404 page (866 bytes) — not an SPA shell; the site returns the same body for every unknown path.
+- host: agent.moneyyoureowed.com
+  role: A2A agent host (JSON-RPC endpoint at /)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/openid-configuration
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/api-catalog
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/api-catalog.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/ucp.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/acp.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/aauth-resource.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/apis.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /apis.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /apis.yml
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: application/json
+    file: ../a2a/moneyyoureowed-com-agent-card.json
+    note: Real 930-byte JSON AgentCard; saved verbatim under a2a/. The legacy agent.json path serves the byte-identical
+      document.
+    standard: A2A Agent Card (1.0.0)
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: application/json
+    file: ../a2a/moneyyoureowed-com-agent-card.json
+    note: Real 930-byte JSON AgentCard; saved verbatim under a2a/. The legacy agent.json path serves the byte-identical
+      document.
+    standard: A2A Agent Card (1.0.0)
+- host: mcp.moneyyoureowed.com
+  role: MCP server host (Streamable HTTP endpoint at /mcp)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/openid-configuration
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/api-catalog
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/api-catalog.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/ucp.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/acp.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/aauth-resource.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/apis.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /apis.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /apis.yml
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/agent-card.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/agent.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/oauth-protected-resource/mcp
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'
+  - path: /.well-known/mcp/server-card.json
+    status: 404
+    content_type: application/json
+    file: null
+    note: 'JSON 404 body {"error": "not found"} (22 bytes).'

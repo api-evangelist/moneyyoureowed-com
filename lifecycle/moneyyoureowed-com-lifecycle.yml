@@ -1,0 +1,37 @@
+generated: '2026-09-19'
+method: searched
+source: https://moneyyoureowed.com/connect
+summary: 'No versioning policy, deprecation policy, sunset headers, SLA, changelog or status page is published for
+  either agent surface. The only version signals are self-declared: MCP serverInfo.version 1.0.0 on protocol 2025-06-18,
+  and agent card version 1.0.0 on A2A protocolVersion 1.0. The /connect page warns only that "Availability and client
+  UI can change". The apex legal pages are dated (July 26, 2026), which is the sole dated lifecycle signal on the
+  property.'
+versioning:
+  scheme: none published
+  current:
+    mcp_server: 1.0.0
+    mcp_protocol: '2025-06-18'
+    a2a_agent: 1.0.0
+    a2a_protocol: '1.0'
+  in_url: false
+  in_header: false
+  policy_url: null
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+status_page: null
+sla: null
+changelog: null
+support_lifetime: null
+probed:
+- url: https://moneyyoureowed.com/status
+  status: 404
+- url: https://moneyyoureowed.com/changelog
+  status: 404
+- url: https://moneyyoureowed.com/developers
+  status: 404
+- url: https://moneyyoureowed.com/connect
+  status: 200
+  note: No version, SLA or deprecation language beyond "Availability and client UI can change".

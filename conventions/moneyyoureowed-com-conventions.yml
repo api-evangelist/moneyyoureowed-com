@@ -1,0 +1,54 @@
+generated: '2026-09-19'
+method: probed
+source: https://moneyyoureowed.com/connect
+summary: 'A read-only, anonymous, single-tool surface with no REST layer, so most cross-cutting REST conventions
+  do not arise. Requests are JSON-RPC 2.0 over HTTPS POST on both endpoints; errors are JSON-RPC error objects;
+  there is no pagination, expansion, metadata, request-id or versioning convention. Idempotency, reversibility and
+  dry-run are all not applicable: there is no write surface.'
+auth:
+  style: none
+  ref: authentication/moneyyoureowed-com-authentication.yml
+transport:
+  mcp: Streamable HTTP, POST https://mcp.moneyyoureowed.com/mcp, stateless
+  a2a: 'JSON-RPC 2.0, POST https://agent.moneyyoureowed.com/ (A2A 1.0 method names: SendMessage)'
+idempotency:
+  coverage: na
+  mechanism: null
+  scope: []
+  note: 'The surface is read-only (MCP annotations readOnlyHint true; card skill "Read-only; no purchases"; /connect:
+    "no create, change, delete, payment, or checkout tool"). There are no writes to protect, so idempotency is not
+    applicable rather than absent.'
+reversibility:
+  grade: na
+  write_surfaces: []
+  note: No write surface exists, so there is nothing to reverse. Recorded as na, which leaves the denominator.
+dry_run_mode:
+  grade: na
+  note: No mutating operation to rehearse.
+pagination:
+  style: none
+  note: answer_money_question returns a fixed fact list (5 facts observed); no cursor or page parameters.
+field_expansion: null
+metadata: null
+request_id:
+  header: null
+  note: No request-id header returned; only Cloudflare cf-ray.
+versioning:
+  ref: lifecycle/moneyyoureowed-com-lifecycle.yml
+  in_url: false
+error_envelope:
+  shape: JSON-RPC 2.0 error object inside HTTP 200
+  ref: errors/moneyyoureowed-com-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  ref: rate-limits/moneyyoureowed-com-rate-limits.yml
+  note: Stated as rate-limited on /connect; no RateLimit-*/X-RateLimit-*/Retry-After headers observed on any response.
+response_shape:
+  mcp: 'result.content[0].text (human text) + result.structuredContent {match: bool, facts: [{claim, source}], products:
+    [{name, price_usd, url}]} + isError'
+  a2a: 'result.message {messageId, role: ROLE_AGENT, parts: [{data: {match, facts[], products[]}}]}'
+  note: Every fact carries a source URL (statute or agency page); every product pointer is a moneyyoureowed.com
+    page with a USD price. The same payload is returned by both bindings.
+data_handling:
+  stated: Questions are matched in memory and are not stored (per /connect and the privacy policy).
+  source: https://moneyyoureowed.com/connect

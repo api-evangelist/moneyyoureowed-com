@@ -1,18 +1,90 @@
 aid: moneyyoureowed-com
 name: Money You're Owed
-description: 'Money You''re Owed is a company surfaced via the API Evangelist harvest backlog (source:
-  a2a-registry) and added to the network as a stub for full-pipeline profiling.'
+description: 'Money You''re Owed publishes plain-English US consumer money-recovery help — free official-route checklists
+  (unclaimed property, airline refunds, EITC, medical bills, property tax) and one-time-purchase self-help kits
+  such as Deposit Defender and DenialFix — and exposes its source-cited fact catalog to AI assistants through two
+  free, anonymous, read-only agent surfaces: a remote MCP server at mcp.moneyyoureowed.com with a single answer_money_question
+  tool, and an A2A 1.0 agent whose card is served from agent.moneyyoureowed.com. There is no REST API, SDK or developer
+  program; the machine surface is agent-native by design.'
 url: https://raw.githubusercontent.com/api-evangelist/moneyyoureowed-com/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:a2a-registry
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-09-19 (local-v3; was a2a-registry harvest stub)
 specificationVersion: '0.20'
 created: '2026-09-19'
 modified: '2026-09-19'
 tags:
 - Company
-apis: []
+- Consumer Finance
+- Consumer Rights
+- Money Recovery
+- Legal Self-Help
+- Education
+- Agents
+- MCP
+- A2A
+- agent-native
+apis:
+- aid: moneyyoureowed-com:catalog-mcp-server
+  name: Money You're Owed Catalog MCP Server
+  description: 'Free public remote Model Context Protocol server (Streamable HTTP, protocol 2025-06-18, stateless,
+    no authentication) exposing one read-only tool, answer_money_question, which takes a plain-language consumer
+    money-recovery question and returns source-cited facts plus an optional pointer to one of the operator''s self-help
+    kits. Documented for Claude and Gemini custom connectors on the /connect page. Probed live 2026-09-19: initialize,
+    tools/list and tools/call all succeed anonymously.'
+  image: https://moneyyoureowed.com/social-card.png
+  humanURL: https://moneyyoureowed.com/connect
+  baseURL: https://mcp.moneyyoureowed.com/mcp
+  tags:
+  - MCP
+  - agent-native
+  - Consumer Finance
+  - Money Recovery
+  - Read-only
+  properties:
+  - type: MCPServer
+    url: mcp/moneyyoureowed-com-mcp.yml
+  - type: MCPServer
+    name: Live MCP endpoint (Streamable HTTP)
+    url: https://mcp.moneyyoureowed.com/mcp
+  - type: Documentation
+    url: https://moneyyoureowed.com/connect
+  - type: Authentication
+    url: authentication/moneyyoureowed-com-authentication.yml
+  - type: ErrorCatalog
+    url: errors/moneyyoureowed-com-problem-types.yml
+  - type: DataModel
+    url: data-model/moneyyoureowed-com-data-model.yml
+- aid: moneyyoureowed-com:catalog-a2a-agent
+  name: Money You're Owed Catalog Agent (A2A)
+  description: 'A2A 1.0 agent ("Money You''re Owed catalog agent", version 1.0.0) with a JSONRPC binding at https://agent.moneyyoureowed.com
+    and one read-only skill, answer-money-questions, answering consumer questions about money owed (deposits, refunds,
+    denied claims) with primary-sourced facts and product pointers. The agent card is served at /.well-known/agent-card.json
+    (and byte-identically at the legacy /.well-known/agent.json) and grades conformant. Probed live 2026-09-19:
+    the 1.0 method SendMessage answers anonymously; streaming, tasks and the pre-1.0 message/send are not implemented.'
+  image: https://moneyyoureowed.com/social-card.png
+  humanURL: https://moneyyoureowed.com/connect
+  baseURL: https://agent.moneyyoureowed.com
+  tags:
+  - A2A
+  - Agents
+  - agent-native
+  - Consumer Finance
+  - Money Recovery
+  - Read-only
+  properties:
+  - type: AgentCard
+    url: a2a/moneyyoureowed-com-a2a.yml
+  - type: AgentCard
+    name: Live agent card (provider-hosted)
+    url: https://agent.moneyyoureowed.com/.well-known/agent-card.json
+  - type: Authentication
+    url: authentication/moneyyoureowed-com-authentication.yml
+  - type: ErrorCatalog
+    url: errors/moneyyoureowed-com-problem-types.yml
+  - type: DataModel
+    url: data-model/moneyyoureowed-com-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -21,3 +93,51 @@ maintainers:
 common:
 - type: Website
   url: https://moneyyoureowed.com/
+- type: Documentation
+  url: https://moneyyoureowed.com/connect
+- type: PrivacyPolicy
+  url: https://moneyyoureowed.com/privacy
+- type: TermsOfService
+  url: https://moneyyoureowed.com/terms
+- type: Contact
+  url: mailto:hello@moneyyoureowed.com
+- type: MCPServer
+  url: mcp/moneyyoureowed-com-mcp.yml
+- type: AgentCard
+  url: a2a/moneyyoureowed-com-a2a.yml
+- type: WellKnown
+  url: well-known/moneyyoureowed-com-well-known.yml
+- type: LLMsTxt
+  url: llms/moneyyoureowed-com-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Authentication
+  url: authentication/moneyyoureowed-com-authentication.yml
+- type: Conformance
+  url: conformance/moneyyoureowed-com-conformance.yml
+- type: Conventions
+  url: conventions/moneyyoureowed-com-conventions.yml
+- type: ErrorCatalog
+  url: errors/moneyyoureowed-com-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/moneyyoureowed-com-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/moneyyoureowed-com-rate-limits.yml
+- type: Plans
+  url: plans/moneyyoureowed-com-plans-pricing.yml
+- type: DataModel
+  url: data-model/moneyyoureowed-com-data-model.yml
+- type: RegulatoryPosture
+  url: regulatory/moneyyoureowed-com-regulatory-posture.yml
+- type: DataSubjectRequest
+  url: https://moneyyoureowed.com/privacy
+- type: Subprocessors
+  url: https://moneyyoureowed.com/privacy
+- type: DomainSecurity
+  url: security/moneyyoureowed-com-domain-security.yml
+image: https://moneyyoureowed.com/social-card.png
+x-enrichment:
+  date: '2026-09-19'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v3
