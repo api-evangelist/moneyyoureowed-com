@@ -41,6 +41,12 @@ apis:
   - agent-native
   - Consumer Finance
   - Money Recovery
+  - Read Only
+  tags_raw:
+  - MCP
+  - agent-native
+  - Consumer Finance
+  - Money Recovery
   - Read-only
   properties:
   - type: MCPServer
@@ -67,6 +73,13 @@ apis:
   humanURL: https://moneyyoureowed.com/connect
   baseURL: https://agent.moneyyoureowed.com
   tags:
+  - A2A
+  - Agents
+  - agent-native
+  - Consumer Finance
+  - Money Recovery
+  - Read Only
+  tags_raw:
   - A2A
   - Agents
   - agent-native
