@@ -1,0 +1,38 @@
+{
+  "endpoint": "https://mcp.moneyyoureowed.com/mcp",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "moneyyoureowed-catalog-mcp",
+    "title": "Money You're Owed Catalog",
+    "version": "1.0.0"
+  },
+  "result": {
+    "tools": [
+      {
+        "name": "answer_money_question",
+        "title": "Answer a money-recovery question",
+        "description": "Look up verified, source-cited facts and a linked educational resource for a US consumer money-recovery question (withheld security deposits, airline refunds, GLP-1/Medicare drug-coverage denials, unclaimed property, ticket-resale refunds, frozen fintech accounts). Read-only lookup: it does not collect personal data, make payments, or change anything.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string",
+              "description": "The consumer's question in plain language, e.g. 'my landlord kept my security deposit'"
+            }
+          },
+          "required": [
+            "question"
+          ]
+        },
+        "annotations": {
+          "title": "Answer a money-recovery question",
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "openWorldHint": false
+        }
+      }
+    ]
+  }
+}
